@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+    <meta charset="UTF-8">
+    <title>Ang Aking Personal na Blog</title>
+    <style>
+        /* Pangkalahatang estilo ng pahina */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Istilo para sa pamagat at header */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        /* Istilo para sa mga navigation links */
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            background: #34495e;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #1abc9c;
+        }
+
+        /* Istilo para sa mga blog post at upload form */
+        .blog-post, .upload-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Istilo para sa form elements */
+        .upload-section h2 {
+            margin-top: 0;
+        }
+
+        .upload-section label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .upload-section input[type="file"],
+        .upload-section textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .upload-section textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        /* Istilo para sa preview container */
+        #previewContainer {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        #previewContainer img,
+        #previewContainer video {
+            max-width: 200px;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        /* Istilo para sa footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #777;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Aking Personal na Blog</h1>
+        <p>Mga kwento, ideya, at karanasan sa buhay</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Tungkol sa Akin</a></li>
+            <li><a href="#">Mga Blog</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- BAGONG SEKSYON PARA SA PAG-UPLOAD -->
+        <section class="upload-section">
+            <h2>Magdagdag ng Bagong Post</h2>
+            <form id="uploadForm">
+                <label for="mediaInput">Mag-upload ng Larawan o Video:</label>
+                <input type="file" id="mediaInput" accept="image/*,video/*" multiple>
+                
+                <label for="postContent">Nilalaman ng Post:</label>
+                <textarea id="postContent" placeholder="Isulat ang iyong kwento dito..."></textarea>
+                
+                <!-- Lalagyan kung saan lilitaw ang preview ng na-upload -->
+                <div id="previewContainer"></div>
+            </form>
+        </section>
+        <!-- WAKAS NG BAGONG SEKSYON -->
+
+        <section class="blog-post">
+            <h2>Unang Hakbang sa Pag-Blogging</h2>
+            <p><small>Hulyo 22, 2026</small></p>
+            <p>Isang masayang simula para sa aking bagong personal blog. Dito ko ibabahagi ang aking mga natutunan, paglalakbay, at iba't ibang kaisipan sa araw-araw...</p>
+            <a href="#">Basahin pa...</a>
+        </section>
+
+        <section class="blog-post">
+            <h2>Mga Paborito Kong Aral sa Buhay</h2>
+            <p><small>Hulyo 15, 2026</small></p>
+            <p>Maraming pagsubok ang dumarating sa ating buhay, ngunit sa bawat hamon ay may kaakibat na leksyon na magpapatatag sa atin...</p>
+            <a href="#">Basahin pa...</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Aking Personal na Blog. Lahat ng karapatan ay nakalaan.</p>
+    </footer>
+
+    <!-- JAVASCRIPT PARA SA PREVIEW -->
+    <script>
+        document.getElementById('mediaInput').addEventListener('change', function(event) {
+            const previewContainer = document.getElementById('previewContainer');
+            previewContainer.innerHTML = ''; // Linisin ang lumang preview
+            
+            const files = event.target.files;
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const fileURL = URL.createObjectURL(file);
+                
+                if (file.type.startsWith('image/')) {
+                    // Kung larawan, gumawa ng <img> tag
+                    const img = document.createElement('img');
+                    img.src = fileURL;
+                    previewContainer.appendChild(img);
+                    
+                } else if (file.type.startsWith('video/')) {
+                    // Kung video, gumawa ng <video> tag
+                    const video = document.createElement('video');
+                    video.src = fileURL;
+                    video.controls = true; // Maglagay ng controls para maplay ang video
+                    previewContainer.appendChild(video);
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
